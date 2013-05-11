@@ -27,7 +27,7 @@
     
 	// Do any additional setup after loading the view, typically from a nib.
 
-    [self.imageView setImageWithURL:[NSURL URLWithString:@"http://files.parse.com/ec0335d6-135b-418a-a5d0-3f697be04c70/3fba291b-f680-4be8-9680-180ff2be227e-file"] placeholderImage:nil options:SDWebImageProgressiveDownload
+    [self.imageView setImageWithURL:[NSURL URLWithString:@"http://files.parse.com/ec0335d6-135b-418a-a5d0-3f697be04c70/3cde3641-7af4-4da3-8de3-89e775b1af37-file"] placeholderImage:nil options:SDWebImageProgressiveDownload
                             progress:^(NSUInteger receivedSize, long long expectedSize) {
                                 NSLog(@"Progressed %d of %llu", receivedSize, expectedSize);
                             }
@@ -36,7 +36,7 @@
  - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"FullScreen"]) {
-        [segue.destinationViewController performSelector:@selector(setImageURL:) withObject:[NSURL URLWithString:@"http://files.parse.com/ec0335d6-135b-418a-a5d0-3f697be04c70/3fba291b-f680-4be8-9680-180ff2be227e-file"]];
+        [segue.destinationViewController performSelector:@selector(setImageURL:) withObject:[NSURL URLWithString:@"http://files.parse.com/ec0335d6-135b-418a-a5d0-3f697be04c70/3cde3641-7af4-4da3-8de3-89e775b1af37-file"]];
     }
 }
 
