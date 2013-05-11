@@ -1,7 +1,12 @@
 TestImageView
 =============
 
-Repo to debug the download of parse files
-This is a very simple project with one view which has 2 image views.
-One of the image views gets the image from a parse file url and another one froma non-files.parse.com url.
-This is to confirm that files.parse.com urls don't time out when trying to fetch data from them.
+When using SDWebImageView in progressive download, a URL that gets fetched does not get cached, and the next time it is fetched to be displayed, it does not appear.
+This is a test project to help debug the issue.
+
+Steps:
+1. Open the project
+2. The image appears in half screen.
+3. Press the button to see the image in full screen.
+4. Image does not appear.
+

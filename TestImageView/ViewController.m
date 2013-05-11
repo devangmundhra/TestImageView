@@ -7,35 +7,42 @@
 //
 
 #import "ViewController.h"
-#import "AFNetworking.h"
-#import "UIImageView+AFNetworking.h"
+#import "SDWebImage/UIImageView+WebCache.h"
 
 @interface ViewController ()
-@property (weak, nonatomic) IBOutlet UIImageView *imageView1;
-@property (weak, nonatomic) IBOutlet UIImageView *imageView2;
-@property (weak, nonatomic) IBOutlet UIWebView *webView;
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @end
 
 @implementation ViewController
 
-@synthesize imageView1 = _imageView1;
-@synthesize imageView2 = _imageView2;
-@synthesize webView = _webView;
+@synthesize imageView = _imageView;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.imageView.contentMode = UIViewContentModeScaleAspectFill;
+    self.imageView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+    self.imageView.backgroundColor = [UIColor blackColor];
+    
 	// Do any additional setup after loading the view, typically from a nib.
-    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://files.parse.com/ec0335d6-135b-418a-a5d0-3f697be04c70/3fba291b-f680-4be8-9680-180ff2be227e-file"]]];
-    [self.imageView1 setImageWithURL:[NSURL URLWithString:@"http://files.parse.com/ec0335d6-135b-418a-a5d0-3f697be04c70/3fba291b-f680-4be8-9680-180ff2be227e-file"] placeholderImage:nil];
-    [self.imageView2 setImageWithURL:[NSURL URLWithString:@"http://3.bp.blogspot.com/-AEuckzpxKs8/TZYrUXqHKBI/AAAAAAAAB6o/3Cbuw1h1pPI/s1600/Sailboats_at_sunset_art_wallpaper.jpg"] placeholderImage:nil];
+
+    [self.imageView setImageWithURL:[NSURL URLWithString:@"http://files.parse.com/ec0335d6-135b-418a-a5d0-3f697be04c70/3fba291b-f680-4be8-9680-180ff2be227e-file"] placeholderImage:nil options:SDWebImageProgressiveDownload
+                            progress:^(NSUInteger receivedSize, long long expectedSize) {
+                                NSLog(@"Progressed %d of %llu", receivedSize, expectedSize);
+                            }
+                           completed:nil];
+}
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"FullScreen"]) {
+        [segue.destinationViewController performSelector:@selector(setImageURL:) withObject:[NSURL URLWithString:@"http://files.parse.com/ec0335d6-135b-418a-a5d0-3f697be04c70/3fba291b-f680-4be8-9680-180ff2be227e-file"]];
+    }
 }
 
 - (void)viewDidUnload
 {
-    [self setWebView:nil];
-    [self setImageView1:nil];
-    [self setImageView2:nil];
+    [self setImageView:nil];
 }
 
 - (void)didReceiveMemoryWarning
